@@ -1,0 +1,40 @@
+local Const = require('ff5.utils.const');
+
+local Passive = Const{
+  EquipShields=0x81,
+  EquipArmor=0x82,
+  EquipRibbons=0x83,
+  EquipSwords=0x84,
+  EquipSpearsAndLances=0x85,
+  EquipKatanas=0x86,
+  EquipAxesAndHammers=0x87,
+  EquipBows=0x88,
+  EquipWhips=0x89,
+  EquipHarps=0x8a,
+  Agility=0x8b,
+  HpPlus10Percent=0x8c,
+  HpPlus20Percent=0x8d,
+  HpPlus30Percent=0x8e,
+  MpPlus10Percent=0x8f,
+  MpPlus30Percent=0x90,
+  Brawl=0x91,
+  DoubleGrip=0x92,
+  TwoHanded=0x93,
+  Medicine=0x94,
+  Cover=0x95,
+  Counter=0x96,
+  Evade=0x97,
+  Learning=0x98,
+  Barrier=0x99,
+  Beserk=0x9a,
+  Caution=0x9b,
+  Preemptive=0x9c,
+  Passages=0x9d,
+  DamageFloor=0x9e,
+  Pitfalls=0x9f,
+  EquipRods=0xa0,
+  Dash=0xa1,
+};
+
+
+return Passive;
