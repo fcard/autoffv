@@ -1,7 +1,8 @@
-local check = require('ff5.battle.check');
-local menu  = require('ff5.battle.menu');
-local character = require('ff5.character');
-local status = require('ff5.status');
+local check = require('autoffv.battle.check');
+local menu  = require('autoffv.battle.menu');
+local character = require('autoffv.character');
+local status = require('autoffv.status');
+local Command = require('autoffv.ability.command');
 
 local fns = {}
 
@@ -43,7 +44,7 @@ local character_param_functions = {}
 local character_direct_param_functions = {}
 
 local function test_param(param, kparams)
-  if type(kparams) == "table" do
+  if type(kparams) == "table" then
     for k, v in pairs(kparams) do
       local p = true;
       if k == "lt" then
@@ -185,13 +186,6 @@ local status_field = {
   Erased     = "permanent",
 };
 
-local character_target = {
-  [0x80] = 0,
-  [0x40] = 1,
-  [0x20] = 2,
-  [0x10] = 1,
-};
-
 local function filter_targeted(allies, characters, kparams)
   local result = {};
   for _, c in pairs(characters) do
@@ -199,15 +193,27 @@ local function filter_targeted(allies, characters, kparams)
     for _, i in pairs(allies) do
       if i ~= c.slot then
         local k = character.get_battler(i);
-        local t = character_target[k.command_use[1].target.character()];
+        local t1 = k.targeting(1);
+        local t2 = k.targeting(2);
+        local exec = k.executing();
+        local targeting_i;
+        if t1 ~= nil then
+          targeting_i = exec and t1 == c.slot;
+          if t2 ~= nil then
+            targeting_i = targeting_i or (exec and t2 == c.slot);
+          end
+        else
+          targeting_i = false;
+        end
+
         if kparams.item ~= nil then
           local item = menu.get_item(menu.item_selection(i));
-          if item ~= nil and item.name() == kparams.item and k.executing() and t == c.slot then
+          if item ~= nil and item.name() == kparams.item and targeting_i then
             p = not kparams.neg;
             break;
           end
         else
-          if k.executing() and t == c.slot then
+          if targeting_i then
             p = not kparams.neg;
             break;
           end
@@ -219,6 +225,34 @@ local function filter_targeted(allies, characters, kparams)
     end
   end
   return result;
+end
+
+local MultiCommands = {
+  [Command.MagicSword] = {a=Command.MagicSwordLv1, b=Command.MagicSwordLv6},
+  [Command.White]  = {a=Command.WhiteLv1, b=Command.WhiteLv6},
+  [Command.Black]  = {a=Command.BlackLv1, b=Command.BlackLv6},
+  [Command.Dimen]  = {a=Command.DimenLv1, b=Command.DimenLv6},
+  [Command.Summon] = {a=Command.SummonLv1, b=Command.SummonLv5},
+  [Command.Red]    = {a=Command.RedLv1, b=Command.RedLv3},
+};
+
+local function test_commands(cmds, tests)
+  local tested = 0;
+  local goal = 0;
+  for _, test in pairs(tests) do
+    goal = goal + 1;
+    for _, cmd in pairs(cmds) do
+      local m = MultiCommands[test];
+      if m ~= nil and (cmd >= m.a and cmd <= m.b) then
+        tested = tested + 1;
+        break;
+      elseif cmd == test then
+        tested = tested + 1;
+        break;
+      end
+    end
+  end
+  return tested == goal;
 end
 
 local function filter_battlers(characters, params)
@@ -248,9 +282,9 @@ local function filter_battlers(characters, params)
           table.insert(result, c);
         end
       end
-    elseif character_str_param_functions[key] ~= nil then
+    elseif character_direct_param_functions[key] ~= nil then
       for _, c in pairs(characters) do
-        if character_str_param_functions[key](c) == kparams then
+        if character_direct_param_functions[key](c) == kparams then
           table.insert(result, c);
         end
       end
@@ -268,6 +302,27 @@ local function filter_battlers(characters, params)
           end
         end
         result = filter_targeted(allies, characters, kparams);
+      end
+    elseif key == "has_command" then
+      local tests = {};
+      if type(kparams) == "string" then
+        table.insert(tests, Command[kparams]);
+      elseif type(kparams) == "number" then
+        table.insert(tests, kparams);
+      else
+        for _, cmd in pairs(kparams) do
+          if type(cmd) == "string" then
+            table.insert(tests, Command[cmd]);
+          else
+            table.insert(tests, cmd);
+          end
+        end
+      end
+      for _, c in pairs(characters) do
+        local cmds = {c.command[1](), c.command[2](), c.command[3](), c.command[4]()};
+        if test_commands(cmds, tests) then
+          table.insert(result, c);
+        end
       end
     end
     characters = result;

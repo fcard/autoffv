@@ -1,7 +1,7 @@
-local battle = require('ff5.battle.battle');
-local character = require('ff5.character');
-local input = require('ff5.automation.input');
-local Command = require('ff5.ability.command');
+local battle = require('autoffv.battle.battle');
+local character = require('autoffv.character');
+local input = require('autoffv.automation.input');
+local Command = require('autoffv.ability.command');
 
 local function select_command(goal_cmd, character_data)
   if character_data == nil then

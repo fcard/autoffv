@@ -1,5 +1,5 @@
-local value = require('ff5.utils.value');
-local equip_proto = require('ff5.equip_proto');
+local value = require('autoffv.utils.value');
+local equip_proto = require('autoffv.equip_proto');
 
 local Element = equip_proto.Element;
 local Stat = equip_proto.Stat;

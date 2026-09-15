@@ -1,4 +1,4 @@
-text_decode = require('ff5.text_decode');
+text_decode = require('autoffv.text_decode');
 
 local function name_reader(address, width)
   local function read_name(id)

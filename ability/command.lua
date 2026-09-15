@@ -1,4 +1,4 @@
-local Const = require('ff5.utils.const');
+local Const = require('autoffv.utils.const');
 
 local Command = Const{
   Nothing=0x00,
@@ -79,6 +79,14 @@ local Command = Const{
   RedLv3=0x4b,
   XMagic=0x4c,
   Blue=0x4d,
+
+  -- special commands for query
+  MagicSword=0x100,
+  White=0x101,
+  Black=0x102,
+  Dimen=0x103,
+  Summon=0x104,
+  Red=0x105,
 };
 
 return Command;

@@ -16,7 +16,7 @@ local function bitflags(values, value_type, enum)
   end
 
   return load(string.format("\
-    local value = require('ff5.utils.value');\
+    local value = require('autoffv.utils.value');\
     local bitflags_meta = {\
     __call = function(this)\
       if next(this.dict) == nil then\

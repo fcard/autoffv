@@ -1,4 +1,4 @@
-local Const = require('ff5.utils.const');
+local Const = require('autoffv.utils.const');
 
 local InputMenu = Const{
   Button1         = 0x0106,

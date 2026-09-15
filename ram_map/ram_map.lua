@@ -1,4 +1,4 @@
-local InputMenu = require('ff5.ram_map.input_menu');
+local InputMenu = require('autoffv.ram_map.input_menu');
 
 return {
   InputMenu = InputMenu,

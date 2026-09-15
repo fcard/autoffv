@@ -1,6 +1,6 @@
-local Const = require('ff5.utils.const');
-local bitflags = require('ff5.utils.bitflags');
-local callable = require('ff5.utils.callable');
+local Const = require('autoffv.utils.const');
+local bitflags = require('autoffv.utils.bitflags');
+local callable = require('autoffv.utils.callable');
 
 local function callable_bitflags(values, value_type)
   local module = {};

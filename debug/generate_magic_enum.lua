@@ -1,4 +1,4 @@
-local magic = require('ff5.magic');
+local magic = require('autoffv.magic');
 
 local function generate_magic_enum()
   console.log("local MagicId = Const{");

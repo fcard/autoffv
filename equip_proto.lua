@@ -1,8 +1,8 @@
-local Const = require('ff5.utils.const');
-local Stat = require('ff5.stat');
-local Element = require('ff5.element').Element;
-local ActionType = require('ff5.action_type').ActionType;
-local TargetType = require('ff5.target_type').TargetType;
+local Const = require('autoffv.utils.const');
+local Stat = require('autoffv.stat');
+local Element = require('autoffv.element').Element;
+local ActionType = require('autoffv.action_type').ActionType;
+local TargetType = require('autoffv.target_type').TargetType;
 
 local function inverse_stat(stat)
   if stat == Stat.Strength then

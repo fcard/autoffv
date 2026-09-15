@@ -1,5 +1,5 @@
-local Const = require('ff5.utils.const');
-local bitflags = require('ff5.utils.bitflags');
+local Const = require('autoffv.utils.const');
+local bitflags = require('autoffv.utils.bitflags');
 
 local function enum_bitflags(enum, values, value_type)
   local bitflag_values = {};

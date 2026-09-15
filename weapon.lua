@@ -1,6 +1,6 @@
-local Const = require('ff5.utils.const');
-local equip_proto = require('ff5.equip_proto');
-local item_description = require("ff5.item_description");
+local Const = require('autoffv.utils.const');
+local equip_proto = require('autoffv.equip_proto');
+local item_description = require("autoffv.item_description");
 
 local Element = equip_proto.Element;
 local Stat = equip_proto.Stat;

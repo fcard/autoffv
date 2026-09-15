@@ -1,10 +1,10 @@
-local Const = require('ff5.utils.const');
-local Command = require('ff5.ability.command');
-local ram_map = require('ff5.ram_map.ram_map');
-local magic = require('ff5.magic');
-local item = require('ff5.item');
-local character = require('ff5.character');
-local check = require('ff5.battle.check');
+local Const = require('autoffv.utils.const');
+local Command = require('autoffv.ability.command');
+local ram_map = require('autoffv.ram_map.ram_map');
+local magic = require('autoffv.magic');
+local item = require('autoffv.item');
+local character = require('autoffv.character');
+local check = require('autoffv.battle.check');
 
 local fns = {};
 

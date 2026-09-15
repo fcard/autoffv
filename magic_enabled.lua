@@ -1,5 +1,5 @@
-local value = require('ff5.utils.value');
-local Command = require('ff5.ability.command');
+local value = require('autoffv.utils.value');
+local Command = require('autoffv.ability.command');
 
 local function magic_enabled(mem)
   local obj = {

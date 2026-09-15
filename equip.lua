@@ -1,9 +1,9 @@
-local Const = require('ff5.utils.const');
-local value = require("ff5.utils.value");
-local item_name = require("ff5.item_name");
-local weapon = require('ff5.weapon');
-local armor = require('ff5.armor');
-local item = require('ff5.item');
+local Const = require('autoffv.utils.const');
+local value = require("autoffv.utils.value");
+local item_name = require("autoffv.item_name");
+local weapon = require('autoffv.weapon');
+local armor = require('autoffv.armor');
+local item = require('autoffv.item');
 
 local equip_meta = {
   __call = function(this)

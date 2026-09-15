@@ -1,4 +1,4 @@
-local Const = require('ff5.utils.const');
+local Const = require('autoffv.utils.const');
 
 local MenuSelect = Const{
   Job            = 0x00,

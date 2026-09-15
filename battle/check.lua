@@ -1,6 +1,6 @@
-local ram_map = require('ff5.ram_map.ram_map');
-local callable_bitflags = require('ff5.utils.callable_bitflags');
-local character = require('ff5.character');
+local ram_map = require('autoffv.ram_map.ram_map');
+local callable_bitflags = require('autoffv.utils.callable_bitflags');
+local character = require('autoffv.character');
 
 local battle_over_flag = callable_bitflags.u8{
   BattleOverFlag = {

@@ -1,5 +1,5 @@
-local enum_bitflags = require('ff5.utils.enum_bitflags');
-local Passive = require('ff5.ability.passive');
+local enum_bitflags = require('autoffv.utils.enum_bitflags');
+local Passive = require('autoffv.ability.passive');
 
 return enum_bitflags.u16(Passive, {
   Passges     = 0x0001,

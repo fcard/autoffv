@@ -1,5 +1,5 @@
 
-local text_decode = require('ff5.text_decode');
+local text_decode = require('autoffv.text_decode');
 
 local function find_text(text)
   local encoded = memory.read_bytes_as_array(0, memory.getmemorydomainsize("CARTROM"), "CARTROM");

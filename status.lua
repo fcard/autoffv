@@ -1,4 +1,4 @@
-local callable_bitflags = require('ff5.utils.callable_bitflags');
+local callable_bitflags = require('autoffv.utils.callable_bitflags');
 
 return callable_bitflags.u8{
   StatusCurable = {

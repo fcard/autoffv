@@ -1,4 +1,4 @@
-local text_decode = require('ff5.text_decode');
+local text_decode = require('autoffv.text_decode');
 
 local function read_description(id)
   local offset = {

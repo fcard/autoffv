@@ -1,28 +1,28 @@
-local mem = require('ff5.utils.mem');
-local value = require('ff5.utils.value');
-local Const = require('ff5.utils.const');
-local None = require('ff5.utils.none');
-local callable = require('ff5.utils.callable');
-local equip = require('ff5.equip');
-local status = require('ff5.status');
-local action_flags = require('ff5.action_flags');
-local damage_modifier = require('ff5.damage_modifier');
-local magic_element_up = require('ff5.magic_element_up');
-local Stat = require('ff5.stat');
-local element = require('ff5.element');
-local weapon_specialty = require('ff5.weapon_specialty');
-local armor_specialty = require('ff5.armor_specialty');
-local magic_enabled = require('ff5.magic_enabled');
-local weapon_category = require('ff5.weapon_category');
-local armor_category = require('ff5.armor_category');
-local action_type = require('ff5.action_type');
-local monster_specialty = require('ff5.monster_specialty');
-local song_chanted = require('ff5.song_chanted');
-local innate_abilities = require('ff5.innate_abilities');
-local creature_type = require('ff5.creature_type');
-local command_immunity = require('ff5.command_immunity');
-local enemy_name = require('ff5.enemy_name');
-local character_name = require('ff5.character_name');
+local mem = require('autoffv.utils.mem');
+local value = require('autoffv.utils.value');
+local Const = require('autoffv.utils.const');
+local None = require('autoffv.utils.none');
+local callable = require('autoffv.utils.callable');
+local equip = require('autoffv.equip');
+local status = require('autoffv.status');
+local action_flags = require('autoffv.action_flags');
+local damage_modifier = require('autoffv.damage_modifier');
+local magic_element_up = require('autoffv.magic_element_up');
+local Stat = require('autoffv.stat');
+local element = require('autoffv.element');
+local weapon_specialty = require('autoffv.weapon_specialty');
+local armor_specialty = require('autoffv.armor_specialty');
+local magic_enabled = require('autoffv.magic_enabled');
+local weapon_category = require('autoffv.weapon_category');
+local armor_category = require('autoffv.armor_category');
+local action_type = require('autoffv.action_type');
+local monster_specialty = require('autoffv.monster_specialty');
+local song_chanted = require('autoffv.song_chanted');
+local innate_abilities = require('autoffv.innate_abilities');
+local creature_type = require('autoffv.creature_type');
+local command_immunity = require('autoffv.command_immunity');
+local enemy_name = require('autoffv.enemy_name');
+local character_name = require('autoffv.character_name');
 
 local Character = Const{
   Bartz=0x100,
@@ -44,6 +44,24 @@ local function character(m)
     obj.back_row = b & 0x80 == 0x80;
   end);
 end
+
+local enemy_target_slot = {
+  [0x80] = 0x04,
+  [0x40] = 0x05,
+  [0x20] = 0x06,
+  [0x10] = 0x07,
+  [0x08] = 0x08,
+  [0x04] = 0x09,
+  [0x02] = 0x0a,
+  [0x01] = 0x0b,
+};
+
+local character_target_slot = {
+  [0x80] = 0x00,
+  [0x40] = 0x01,
+  [0x20] = 0x02,
+  [0x10] = 0x03,
+};
 
 local battler_identifier = {};
 
@@ -213,7 +231,18 @@ local function get_battler(slot)
   battler.atb_flag = value.u8(mem(0x3cfb + slot*11));
 
   function battler.executing()
-    return (battler.atb_flag() & 0x40) == 0x40;
+    local b = battler.atb_flag();
+    return (b & 0x40) == 0x40;
+  end
+
+  function battler.targeting(n)
+    local t = battler.command_use[n].target.character();
+    if t ~= 0x00 then
+      return character_target_slot[t];
+    else
+      local s = battler.command_use[n].target.enemy();
+      return enemy_target_slot[s];
+    end
   end
 
   if slot < 4 then
