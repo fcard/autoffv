@@ -142,5 +142,5 @@ Examples:
 ```lua
 battle.query{enemy={hp_ratio={lt=0.125}}} -- any enemy with health below 1/8 its total (for e.g. Catch)
 battle.query{character={status="Dead", targeted={ally="Any", item="PhoenxDwn", neg=true}}} -- any character that is dead and not currently targeted by a phoenix down.
-battle.query{character={has_command={"White, "XMagic"}}} -- any character that has both the !White magic and the !X Nagic commands.
+battle.query{character={has_command={"White", "XMagic"}}} -- any character that has both the !White magic and the !X Nagic commands.
 ```
