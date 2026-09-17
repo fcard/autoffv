@@ -446,6 +446,12 @@ function fns.find_entity_index(entity)
   end
 end
 
+function fns.selected_command()
+  local character_slot = fns.active_character();
+  local cmd_index = fns.command_selection(character_slot);
+  return character.get_battler(character_slot).command[cmd_index+1].get();
+end
+
 local battle_only = check.battle_only_functions(fns);
 
 return {
@@ -479,6 +485,7 @@ return {
   find_command_index = battle_only.find_command_index,
   find_item_index = battle_only.find_item_index,
   find_entity_index = battle_only.find_entity_index,
+  selected_command = battle_only.selected_command,
 
   BattleMenu = BattleMenu,
 };

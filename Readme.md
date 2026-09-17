@@ -84,6 +84,8 @@ battle_menu.fight(TARGET); -- has the active party member fight TARGET
 battle_menu.fight(TARGET, USER); -- has USER fight TARGET
 battle_menu.use_item(ITEM, TARGET); -- has the active party member use ITEM on TARGET
 battle_menu.use_item(ITEM, TARGET, USER); -- has USER use ITEM on TARGET
+battle_menu.use_spell(SPELL, TARGET); -- has the active party member use SPELL on TARGET
+battle_menu.use_spell(SPELL, TARGET, USER); -- has USER use SPELL on TARGET
 ```
 
 ## `battle.query`
